@@ -17,12 +17,31 @@ LOCAL_BIN_PATH="${LOCAL_USR_PATH}/bin"
 # /usr/local/etc/rc.d
 LOCAL_RC_PATH="${LOCAL_USR_PATH}/etc/rc.d"
 
-
 # /usr/share
 LOCAL_SHARE_PATH="${LOCAL_USR_PATH}/share"
 
 # app name
 APP_NAME=frpc
+
+# app cname
+APP_CNAME="frpc"
+
+# app id
+APP_ID="app_tcz_fprc"
+
+# app frpc version
+
+APP_FRPC_VERSION="0.27.0"
+
+# app desc
+
+APP_DESC="frp is a fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."
+
+# app_width
+APP_WIDTH=1000
+
+# app_height
+APP_HEIGHT=700
 
 # app run path
 APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
