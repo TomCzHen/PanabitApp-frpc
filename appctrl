@@ -1,0 +1,82 @@
+#!/bin/sh
+
+
+# ram disk
+RAM_DISK="/usr/ramdisk"
+
+# app name
+APP_NAME=frpc
+
+# app run path
+APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
+
+# app upgrade path
+APP_UPGRADE_ROOT="${RAM_DISK}/appupgrade"
+
+if [ -f app_env ]; then
+    . app_env
+else
+    . "${APP_RUN_ROOT}/app_env"
+fi
+
+app_start()
+{
+    if [ -d "${APP_WEB_CGI_ROOT}" ]; then
+        rm -rf "${APP_WEB_CGI_ROOT}"
+    fi
+
+    mkdir -p "${APP_WEB_CGI_ROOT}"
+
+    cp -rf ${APP_RUN_ROOT}/web/cgi/* "${APP_WEB_CGI_ROOT}"
+
+    "${APP_CTRL}" --start
+}
+
+app_stop()
+{
+    "${APP_CTRL}" --stop
+}
+
+app_enable()
+{
+    app_start
+    "${APP_CTRL}" -w 1
+}
+
+app_disable()
+{
+    "${APP_CTRL}" -w 0
+    app_stop
+}
+
+app_status()
+{
+    local switch="$(${APP_CTRL} -w)"
+
+    if [ "${switch}" = "0" ]; then
+        echo disable
+    else
+        echo enable
+    fi
+}
+
+case "$1" in
+    "start")
+        app_start
+    ;;
+    "stop")
+        app_stop
+    ;;
+    "enable")
+        app_enable
+    ;;
+    "disable")
+        app_disable
+    ;;
+    "status")
+        app_status
+    ;;
+    *)
+        echo "unknown action!"
+    ;;
+esac

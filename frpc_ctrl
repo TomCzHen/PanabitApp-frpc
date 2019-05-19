@@ -1,0 +1,120 @@
+#!/bin/sh
+
+# ram disk
+RAM_DISK="/usr/ramdisk"
+
+# app name
+APP_NAME=frpc
+
+# app run path
+APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
+
+if [ -f app_env ]; then
+    . app_env
+else
+    . ${APP_RUN_ROOT}/app_env
+fi
+
+
+[ ! -d "${APP_CONFIG_ROOT}" ] && mkdir -p "${APP_CONFIG_ROOT}"
+[ ! -f "${APP_SWITCH_FILE}" ] && touch "${APP_SWITCH_FILE}"
+
+start() {
+
+    if [ ! -f "${APP_INI_FILE}" ]; then
+        echo "${ERR_MSG_APP_INI_FILE_NOT_EXIST}"
+        exit 1
+    else
+        service "${APP_DAEMON}" onestart
+    fi
+}
+
+stop() {
+    service "${APP_DAEMON}" onestop
+}
+
+restart() {
+    service "${APP_DAEMON}" onerestart
+}
+
+show_config() {
+
+    if ! [ -f "${APP_INI_FILE}" ]; then
+        echo ""
+        return
+    fi
+
+    case "${1}" in
+
+        "raw")
+            cat "${APP_INI_FILE}"
+        ;;
+        "json")
+            local ini_text=""
+            while IFS= read -r line
+            do
+                ini_text="${ini_text}${line}\n"
+            done <"${APP_INI_FILE}"
+            echo "${ini_text}"
+        ;;
+    esac
+
+}
+
+
+switch() {
+    case ${1} in
+        "")
+            if [ -f "${APP_SWITCH_FILE}" ]; then
+                local switch=$(cat "${APP_SWITCH_FILE}")
+                echo "${switch}"
+            else
+                echo 0
+            fi
+        ;;
+        "1" | "0")
+            echo ${1} >"${APP_SWITCH_FILE}"
+        ;;
+    esac
+}
+
+running() {
+
+    service "${APP_DAEMON}" onestatus
+
+}
+
+
+main() {
+
+    case ${1} in
+        "-c" | "--config")
+            shift
+            show_config ${*}
+        ;;
+        "-w" | "--switch")
+            shift
+            switch ${*}
+        ;;
+        "-s" | "--start")
+            start
+        ;;
+        "-r" | "--restart")
+            restart
+        ;;
+        "-t" | "--stop")
+            stop
+        ;;
+        "-r" | "--running")
+            running
+        ;;
+        "-h" | "--help" | "--")
+            printf "usage:\t -s|--start\n"
+            printf "      \t -e|--enabled [1|0]\n"
+            printf "      \t -t|--stop\n"
+            printf "      \t -c|--config\n"
+        ;;
+    esac
+}
+
+main ${*}

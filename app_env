@@ -1,0 +1,62 @@
+#!/bin/sh
+
+PG_CONF="/etc/PG.conf"
+
+if [ -f "${PG_CONF}" ]; then
+    . ${PG_CONF}
+fi
+
+# ram disk
+RAM_DISK="/usr/ramdisk"
+
+LOCAL_USR_PATH="/usr/local"
+
+# /usr/local/bin
+LOCAL_BIN_PATH="${LOCAL_USR_PATH}/bin"
+
+# /usr/local/etc/rc.d
+LOCAL_RC_PATH="${LOCAL_USR_PATH}/etc/rc.d"
+
+
+# /usr/share
+LOCAL_SHARE_PATH="${LOCAL_USR_PATH}/share"
+
+# app name
+APP_NAME=frpc
+
+# app run path
+APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
+
+# app web cgi path
+APP_WEB_CGI_ROOT="${RAM_DISK}/admin/cgi-bin/App/${APP_NAME}"
+
+# app config path
+APP_CONFIG_ROOT="${PGETC}/App/${APP_NAME}"
+
+# app daemon name
+APP_DAEMON="${APP_NAME}_daemon"
+
+# app html path name
+APP_WEB_FOLDER="web"
+
+# app web static path
+APP_WEB_STATIC_FOLDER="${LOCAL_SHARE_PATH}/${APP_NAME}/${APP_WEB_FOLDER}"
+
+# app_ctl
+APP_CTRL="${APP_RUN_ROOT}/${APP_NAME}_ctrl"
+
+# app ini
+APP_INI_FILE="${APP_CONFIG_ROOT}/frpc.ini"
+
+# app bin file
+APP_BIN="${LOCAL_BIN_PATH}/${APP_NAME}"
+
+# app switch file
+APP_SWITCH_FILE="${APP_CONFIG_ROOT}/switchfile"
+
+
+
+
+# error message
+
+ERR_MSG_APP_INI_FILE_NOT_EXIST="找不到 ${APP_INI_FILE} 文件"

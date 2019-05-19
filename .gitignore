@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea
 dist
-*/resource/bin/*
+resource/bin/*
 !.gitkeep

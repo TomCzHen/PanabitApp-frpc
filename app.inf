@@ -1,0 +1,9 @@
+app_id=app_tcz_fprc
+app_name="frpc"
+app_cname="frp客户端"
+app_version="20190516_0.27.0"
+app_frpc_version="0.27.0"
+app_builddate="2019-05-16 18:21:23"
+app_desc="frp 是一个可用于内网穿透的高性能的反向代理应用。"
+app_width=1100
+app_height=700

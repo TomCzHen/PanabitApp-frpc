@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# ram disk
+RAM_DISK="/usr/ramdisk"
+
+# app name
+APP_NAME=frpc
+
+# app run path
+APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
+
+if [ -f app_env ]; then
+    . app_env
+else
+    . "${APP_RUN_ROOT}/app_env"
+fi
+
+
+rm "${APP_BIN}"
+rm "${LOCAL_RC_PATH}/${APP_DAEMON}"
+
+rm -rf "${LOCAL_SHARE_PATH}/${APP_NAME}"
+rm -rf "${APP_WEB_CGI_ROOT}"

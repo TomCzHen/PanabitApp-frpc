@@ -1,0 +1,56 @@
+#!/bin/sh
+
+#This script is created by ssparser automatically. The parser first created by MaoShouyan
+printf "Content-type: text/html;charset=UTF-8
+Cache-Control: no-cache
+
+"
+echo -n "";
+
+# ram disk
+RAM_DISK="/usr/ramdisk"
+
+# app name
+APP_NAME=frpc
+
+# app run path
+APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
+
+if [ -f ../../app_env ]; then
+    . ../../app_env
+else
+    . "${APP_RUN_ROOT}/app_env"
+fi
+
+update_frpc() {
+    local ini_text="$(cat ${CGI_config_file})"
+
+    rm -rf ${CGI_config_file}
+
+    echo "${ini_text}" > ${APP_INI_FILE}
+
+    local msg="$(${APP_CTRL} --restart)"
+    if [ "${?}" = "0" ]; then
+        msg=""
+    fi
+    local json="{\"config\":\"$(${APP_CTRL} --config json)\",\"status\":\"$(${APP_CTRL} --running)\",\"message\":\"${msg}\"}"
+    echo -n "${json}"
+    exit 0
+}
+
+fetch_frpc() {
+
+    local json="{\"config\":\"$(${APP_CTRL} --config json)\",\"status\":\"$(${APP_CTRL} --running)\",\"message\":\"\"}"
+    echo -n "${json}"
+}
+
+
+
+case "${REQUEST_METHOD}" in
+    "POST")
+        update_frpc
+    ;;
+    "GET")
+        fetch_frpc
+    ;;
+esac

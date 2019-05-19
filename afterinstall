@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# ram disk
+RAM_DISK="/usr/ramdisk"
+
+# app name
+APP_NAME=frpc
+
+# app run path
+APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
+
+if [ -f app_env ]; then
+    . app_env
+else
+    . "${APP_RUN_ROOT}/app_env"
+fi

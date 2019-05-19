@@ -1,0 +1,54 @@
+#!/bin/sh
+
+#
+# PROVIDE: frpc
+# REQUIRE: networking
+# KEYWORD: proxy
+
+# ram disk
+RAM_DISK="/usr/ramdisk"
+
+# app name
+APP_NAME=frpc
+
+# app run path
+APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
+
+
+if [ -f ../../app_env ]; then
+    . ../../app_env
+else
+    . "${APP_RUN_ROOT}/app_env"
+fi
+
+. /etc/rc.subr
+
+
+name="${APP_NAME}"
+rcvar=${name}_enable
+load_rc_config ${name}
+
+pidfile="/var/run/${name}.pid"
+required_files="${APP_INI_FILE}"
+command="${APP_BIN}"
+start_cmd=frpc_start
+stop_cmd=frpc_stop
+
+frpc_start() {
+
+    local daemon_pid=$(ps axw | grep "daemon: ${APP_BIN}*" | grep -v grep | awk '{print $1}')
+    if [ -z "${daemon_pid}" ]; then
+        echo "Starting supervising daemon."
+        /usr/sbin/daemon -cfr -p ${pidfile} -u root ${APP_BIN} -c ${APP_INI_FILE}
+    fi
+}
+
+
+frpc_stop() {
+    local daemon_pid=$(ps axw | grep "daemon: ${APP_BIN}*" | grep -v grep | awk '{print $1}')
+    if ! [ -z "${daemon_pid}" ]; then
+        kill -s TERM ${daemon_pid}
+    fi
+}
+
+run_rc_command "$1"
