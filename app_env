@@ -46,6 +46,9 @@ APP_HEIGHT=700
 # app run path
 APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
 
+# app resource tar file
+APP_RESOURCE_TAR_FILE="resource.tar.gz"
+
 # app web cgi path
 APP_WEB_CGI_ROOT="${RAM_DISK}/admin/cgi-bin/App/${APP_NAME}"
 

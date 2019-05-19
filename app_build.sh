@@ -31,7 +31,7 @@ tar -cf - \
 --exclude=.gitignore \
 . | $(cd "${output_dir}/temp" && tar -xf -)
 
-tar -czf "${output_dir}/temp/resource.tar.gz" --exclude=.gitkeep resource
+tar -czf "${output_dir}/temp/${APP_RESOURCE_TAR_FILE}" --exclude=.gitkeep -C "resource" .
 envsubst < app.inf.template > "${output_dir}/temp/app.inf"
 
 tar -czf "${output_dir}/${output_file}.apx" -C "${output_dir}/temp" . && rm -rf "${output_dir}/temp"
