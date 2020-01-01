@@ -16,6 +16,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Fetch frpc release bin file.
       env:
-        frp_download_url: https://github.com/fatedier/frp/releases/download/v${{ matrix.frp_version }}/frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}.tar.gz
+        FRP_RELEASE_FILE_NAME: frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}
+        FRP_RELEASE_FILE_URL: https://github.com/fatedier/frp/releases/download/v${{ matrix.frp_version }}/frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}.tar.gz
       run: |
-        ls -ll
+        curl -L $FRP_RELEASE_FILE_URL | tar -xf -C resource/bin $FRP_RELEASE_FILENAME/frpc --strip-components 1
+        ls -ll resource/bin
