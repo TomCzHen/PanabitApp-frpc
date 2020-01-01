@@ -1,8 +1,8 @@
-app_id="${INF_APP_ID}"
-app_name="${INF_APP_NAME}"
-app_cname="${INF_APP_CNAME}"
-app_version="${INF_APP_VERSION}"
-app_builddate="${INF_APP_BUILD_DATE}"
-app_desc="${INF_APP_DESC}"
-app_width=${INF_APP_WIDTH}
-app_height=${INF_APP_HEIGHT}
+app_id="${APP_ID}"
+app_name="${APP_NAME}"
+app_cname="${APP_CNAME}"
+app_version="${APP_VERSION}"
+app_builddate="${APP_BUILD_DATE}"
+app_desc="${APP_DESC}"
+app_width=${APP_WIDTH}
+app_height=${APP_HEIGHT}

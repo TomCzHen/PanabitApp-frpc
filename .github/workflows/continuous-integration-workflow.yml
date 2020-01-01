@@ -13,11 +13,26 @@ jobs:
         arch: ['386']
         frp_version: ['0.27.1']
     steps:
-    - uses: actions/checkout@v1
-    - name: Fetch frpc release bin file.
-      env:
-        FRP_RELEASE_FILE_URL: https://github.com/fatedier/frp/releases/download/v${{ matrix.frp_version }}/frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}.tar.gz
-        FRPC_BIN_FILE_PATH: frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}/frpc
-      run: |
-        curl -L $FRP_RELEASE_FILE_URL | tar -xz -C resource/bin $FRPC_BIN_FILE_PATH --strip-components 1
-        ls -ll resource/bin
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Fetch frpc bin file
+        env:
+          FRP_RELEASE_FILE_URL: https://github.com/fatedier/frp/releases/download/v${{ matrix.frp_version }}/frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}.tar.gz
+          FRPC_BIN_FILE_PATH: frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}/frpc
+        run: curl -sL ${FRP_RELEASE_FILE_URL} | tar -xz -C resource/bin ${FRPC_BIN_FILE_PATH} --strip-components 1
+      - name: Build Panabit App package
+        env:
+          APP_ID: app_tcz_fprc
+          APP_NAME: frpc
+          APP_CNAME: frpc
+          APP_WIDTH: 1000
+          APP_HEIGHT: 700
+          APP_DESC: "frp is a fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."
+          APP_VERSION: test_${{ matrix.frp_version }}
+          APP_FRPC_VERSION: ${{ matrix.frp_version }}
+        run: |
+          envsubst < app.inf.template > app.inf
+          cat app.inf
+
