@@ -30,9 +30,13 @@ jobs:
           APP_WIDTH: 1000
           APP_HEIGHT: 700
           APP_DESC: "frp is a fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."
-          APP_VERSION: test_${{ matrix.frp_version }}
+          APP_VERSION: $(date +%Y%m%d)_${{ matrix.frp_version }}
           APP_FRPC_VERSION: ${{ matrix.frp_version }}
+          APP_BUILD_DATE: $(date +"%Y-%m-%d %H:%M:%S")
         run: |
-          envsubst < app.inf.template > app.inf
-          cat app.inf
+          mkdir -p dist
+          cp -r scripts/* dist/temp
+          tar -czf dist/temp/resource.tar.gz --exclude=.gitkeep -C resource .
+          envsubst < app.inf.template > dist/temp/app.inf
+          tar -czf dist/PanabitApp-${APP_NAME}_${APP_VERSION}.apx  -C dist/temp .
 

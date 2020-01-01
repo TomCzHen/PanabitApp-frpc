@@ -24,30 +24,28 @@ LOCAL_SHARE_PATH="${LOCAL_USR_PATH}/share"
 APP_NAME=frpc
 
 # app cname
-APP_CNAME="frpc"
+# APP_CNAME="frpc"
 
 # app id
-APP_ID="app_tcz_fprc"
+# APP_ID="app_tcz_fprc"
 
 # app frpc version
-
-APP_FRPC_VERSION="0.27.0"
+# APP_FRPC_VERSION="0.27.0"
 
 # app desc
-
-APP_DESC="frp is a fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."
+# APP_DESC="frp is a fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."
 
 # app_width
-APP_WIDTH=1000
+# APP_WIDTH=1000
 
 # app_height
-APP_HEIGHT=700
+# APP_HEIGHT=700
 
 # app run path
 APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
 
 # app resource tar file
-APP_RESOURCE_TAR_FILE="resource.tar.gz"
+# APP_RESOURCE_TAR_FILE="resource.tar.gz"
 
 # app web cgi path
 APP_WEB_CGI_ROOT="${RAM_DISK}/admin/cgi-bin/App/${APP_NAME}"
@@ -65,7 +63,7 @@ APP_WEB_FOLDER="web"
 APP_WEB_STATIC_FOLDER="${LOCAL_SHARE_PATH}/${APP_NAME}/${APP_WEB_FOLDER}"
 
 # app_ctl
-APP_CTRL="${APP_RUN_ROOT}/${APP_NAME}_ctrl"
+APP_CTRL="${APP_RUN_ROOT}/frpc_ctrl"
 
 # app ini
 APP_INI_FILE="${APP_CONFIG_ROOT}/frpc.ini"
@@ -75,9 +73,6 @@ APP_BIN="${LOCAL_BIN_PATH}/${APP_NAME}"
 
 # app switch file
 APP_SWITCH_FILE="${APP_CONFIG_ROOT}/switchfile"
-
-
-
 
 # error message
 
