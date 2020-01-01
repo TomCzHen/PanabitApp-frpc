@@ -11,11 +11,11 @@ jobs:
     strategy:
       matrix:
         arch: ['386']
-        frp_version: ['0.30.0', '0.29.1','0.28.2','0.27.1']
+        frp_version: ['0.27.1']
     steps:
     - uses: actions/checkout@v1
     - name: Fetch frpc release bin file.
       env:
         frp_download_url: https://github.com/fatedier/frp/releases/download/v${{ matrix.frp_version }}/frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}.tar.gz
       run: |
-        echo ${frp_download_url}
+        ls -ll
