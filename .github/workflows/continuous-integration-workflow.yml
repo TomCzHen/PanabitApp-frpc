@@ -1,9 +1,6 @@
-name: CI
+name: Auto Build On Release
 
-on:
-  push:
-    branches:
-      - master
+on: release
 
 jobs:
   build:
@@ -39,4 +36,10 @@ jobs:
           tar -czf dist/temp/resource.tar.gz --exclude=.gitkeep -C resource .
           envsubst < app.inf.template > dist/temp/app.inf
           tar -czf dist/PanabitApp-${APP_NAME}_${APP_VERSION}.apx  -C dist/temp .
-
+      - name: Upload asset to release
+        uses: actions-github/upload-to-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          type: 'application/octet-stream'
+          file: 'dist/PanabitApp-${APP_NAME}_${APP_VERSION}.apx'
