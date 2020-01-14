@@ -1,6 +1,8 @@
 name: Auto Build On Release
 
-on: release
+on:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -27,10 +29,12 @@ jobs:
           APP_WIDTH: 1000
           APP_HEIGHT: 700
           APP_DESC: "frp is a fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."
-          APP_VERSION: $(date +%Y%m%d)_${{ matrix.frp_version }}
+          FRP_VERSION: ${{ matrix.frp_version }}
           APP_FRPC_VERSION: ${{ matrix.frp_version }}
-          APP_BUILD_DATE: $(date +"%Y-%m-%d %H:%M:%S")
+
         run: |
+          export APP_VERSION=$(date +%Y%m%d)_${FRP_VERSION}
+          export APP_BUILD_DATE=$(date +"%Y-%m-%d %H:%M:%S")
           mkdir -p dist/tmp
           cp -r scripts/* dist/tmp
           tar -czf dist/tmp/resource.tar.gz --exclude=.gitkeep -C resource .
