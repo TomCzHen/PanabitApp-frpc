@@ -31,11 +31,11 @@ jobs:
           APP_FRPC_VERSION: ${{ matrix.frp_version }}
           APP_BUILD_DATE: $(date +"%Y-%m-%d %H:%M:%S")
         run: |
-          mkdir -p dist
-          cp -r scripts/* dist/temp
-          tar -czf dist/temp/resource.tar.gz --exclude=.gitkeep -C resource .
-          envsubst < app.inf.template > dist/temp/app.inf
-          tar -czf dist/PanabitApp-${APP_NAME}_${APP_VERSION}.apx  -C dist/temp .
+          mkdir -p dist/tmp
+          cp -r scripts/* dist/tmp
+          tar -czf dist/tmp/resource.tar.gz --exclude=.gitkeep -C resource .
+          envsubst < app.inf.template > dist/tmp/app.inf
+          tar -czf dist/PanabitApp-${APP_NAME}_${APP_VERSION}.apx  -C dist/tmp .
       - name: Upload asset to release
         uses: actions-github/upload-to-release@v1.0.0
         env:
