@@ -45,5 +45,5 @@ jobs:
       - name: Upload asset to release
         uses: AButler/upload-release-assets@v2.0
         with:
-          file: 'dist/*.apx'
+          files: 'dist/*.apx'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
