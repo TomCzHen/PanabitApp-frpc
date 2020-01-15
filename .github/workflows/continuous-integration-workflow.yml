@@ -38,7 +38,7 @@ jobs:
           tar -czf dist/tmp/resource.tar.gz --exclude=.gitkeep -C resource .
           envsubst < app.inf.template > dist/tmp/app.inf
           tar -czf dist/PanabitApp-${APP_NAME}_${APP_VERSION}.apx  -C dist/tmp .
-          ls dist/tmp
+          ls dist
       - name: Upload asset to release
         uses: actions-github/upload-to-release@v1.0.0
         env:
