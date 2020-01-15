@@ -11,6 +11,16 @@ jobs:
       matrix:
         arch: ['386']
         frp_version: ['0.27.1']
+    env:
+      APP_ID: app_tcz_fprc
+      APP_NAME: frpc
+      APP_CNAME: frpc
+      APP_WIDTH: 1000
+      APP_HEIGHT: 700
+      APP_DESC: "frp is a fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."
+      APP_VERSION: $(date +%Y%m%d)_${{ matrix.frp_version }}
+      # APP_FRPC_VERSION: ${{ matrix.frp_version }}
+      APP_BUILD_DATE: $(date +"%Y-%m-%d %H:%M:%S")
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,19 +32,10 @@ jobs:
           FRPC_BIN_FILE_PATH: frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}/frpc
         run: curl -sL ${FRP_RELEASE_FILE_URL} | tar -xz -C resource/bin ${FRPC_BIN_FILE_PATH} --strip-components 1
       - name: Build Panabit App package
-        env:
-          APP_ID: app_tcz_fprc
-          APP_NAME: frpc
-          APP_CNAME: frpc
-          APP_WIDTH: 1000
-          APP_HEIGHT: 700
-          APP_DESC: "frp is a fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."
-          FRP_VERSION: ${{ matrix.frp_version }}
-          APP_FRPC_VERSION: ${{ matrix.frp_version }}
-
+        shell: bash
         run: |
-          export APP_VERSION=$(date +%Y%m%d)_${FRP_VERSION}
-          export APP_BUILD_DATE=$(date +"%Y-%m-%d %H:%M:%S")
+          echo ${APP_VERSION}
+          echo ${APP_BUILD_DATE}
           mkdir -p dist/tmp
           cp -r scripts/* dist/tmp
           tar -czf dist/tmp/resource.tar.gz --exclude=.gitkeep -C resource .
@@ -46,4 +47,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           type: 'application/octet-stream'
-          file: 'dist/PanabitApp-${APP_NAME}_${APP_VERSION}.apx'
+          file: dist/PanabitApp-${APP_NAME}_${APP_VERSION}.apx
