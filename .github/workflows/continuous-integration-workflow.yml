@@ -28,11 +28,14 @@ jobs:
           FRP_RELEASE_FILE_URL: https://github.com/fatedier/frp/releases/download/v${{ matrix.frp_version }}/frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}.tar.gz
           FRPC_BIN_FILE_PATH: frp_${{ matrix.frp_version }}_freebsd_${{ matrix.arch }}/frpc
         run: curl -sL ${FRP_RELEASE_FILE_URL} | tar -xz -C resource/bin ${FRPC_BIN_FILE_PATH} --strip-components 1
-      - name: Build Panabit App package
+      - name: Set Env
         shell: bash
         run: |
           echo ::set-env name=APP_VERSION::$(date +%Y%m%d)_${{ matrix.frp_version }}
           echo ::set-env name=APP_BUILD_DATE::$(date +"%Y-%m-%d %H:%M:%S")
+      - name: Build Panabit App package
+        shell: bash
+        run: |
           mkdir -p dist/tmp
           cp -r scripts/* dist/tmp
           tar -czf dist/tmp/resource.tar.gz --exclude=.gitkeep -C resource .
