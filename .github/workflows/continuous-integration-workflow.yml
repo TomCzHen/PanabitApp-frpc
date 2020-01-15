@@ -1,8 +1,7 @@
 name: Auto Build On Release
 
 on:
-  release:
-    types: [published]
+  push:
 
 jobs:
   build:
@@ -10,7 +9,7 @@ jobs:
     strategy:
       matrix:
         arch: ['386']
-        frp_version: ['0.27.1']
+        frp_version: ['0.28.2','0.29.1','0.31.1']
     env:
       APP_ID: app_tcz_fprc
       APP_NAME: frpc
@@ -48,4 +47,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           file: "dist/*.apx"
-          update_latest_release: true
