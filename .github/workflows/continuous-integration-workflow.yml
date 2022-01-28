@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         arch: ['386']
-        frp_version: ['0.28.2','0.29.1','0.31.1']
+        frp_version: ['0.37.1','0.39']
     env:
       APP_ID: app_tcz_fprc
       APP_NAME: frpc
