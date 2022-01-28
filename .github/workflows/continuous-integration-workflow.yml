@@ -3,7 +3,8 @@ name: Auto Build On Release
 on:
   release:
     types: [published]
-
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 jobs:
   build:
     runs-on: ubuntu-latest
