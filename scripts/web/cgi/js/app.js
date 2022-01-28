@@ -22,4 +22,4 @@ else
     . "${APP_RUN_ROOT}/app_env"
 fi
 
-cat ${APP_WEB_STATIC_FOLDER}/js/index.js
+cat ${APP_WEB_STATIC_FOLDER}/js/app.js
