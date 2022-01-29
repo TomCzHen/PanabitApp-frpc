@@ -50,6 +50,9 @@ APP_RUN_ROOT="${RAM_DISK}/app/${APP_NAME}"
 # app web cgi path
 APP_WEB_CGI_ROOT="${RAM_DISK}/admin/cgi-bin/App/${APP_NAME}"
 
+# app web html path
+APP_WEB_HTML_ROOT="${RAM_DISK}/admin/html/App/${APP_NAME}"
+
 # app config path
 APP_CONFIG_ROOT="${PGETC}/App/${APP_NAME}"
 
@@ -76,4 +79,4 @@ APP_SWITCH_FILE="${APP_CONFIG_ROOT}/switchfile"
 
 # error message
 
-ERR_MSG_APP_INI_FILE_NOT_EXIST="找不到 ${APP_INI_FILE} 文件"
+ERR_MSG_APP_INI_FILE_NOT_EXIST=" ${APP_INI_FILE} don't exists."

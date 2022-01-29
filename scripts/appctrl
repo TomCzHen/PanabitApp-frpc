@@ -26,8 +26,10 @@ app_start()
     fi
 
     mkdir -p "${APP_WEB_CGI_ROOT}"
+    mkdir -p "${APP_WEB_HTML_ROOT}"
 
     cp -rf ${APP_RUN_ROOT}/web/cgi/* "${APP_WEB_CGI_ROOT}"
+    cp -rf ${APP_RUN_ROOT}/web/html/* "${APP_WEB_HTML_ROOT}"
 
     "${APP_CTRL}" --start
 }

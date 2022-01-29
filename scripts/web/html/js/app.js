@@ -5,7 +5,8 @@ new Vue({
             frpc: {
                 config: "",
                 status: "",
-                message: ""
+                message: "",
+                version: ""
             },
             dialog: false,
             upload_config: "",

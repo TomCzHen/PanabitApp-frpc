@@ -1,13 +1,5 @@
 #!/bin/sh
 
-#This script is created by ssparser automatically. The parser first created by MaoShouyan
-printf "Content-type: text/html;charset=UTF-8
-Cache-Control: no-cache
-
-"
-echo -n "";
-
-# ram disk
 RAM_DISK="/usr/ramdisk"
 
 # app name
@@ -33,18 +25,20 @@ update_frpc() {
     if [ "${?}" = "0" ]; then
         msg=""
     fi
-    local json="{\"config\":\"$(${APP_CTRL} --config json)\",\"status\":\"$(${APP_CTRL} --running)\",\"message\":\"${msg}\"}"
+    local json="{\"config\":\"$(${APP_CTRL} --config json)\",\"status\":\"$(${APP_CTRL} --running)\",\"message\":\"${msg}\",\"version\":\"$(frpc -v)\"}"
     echo -n "${json}"
     exit 0
 }
 
 fetch_frpc() {
 
-    local json="{\"config\":\"$(${APP_CTRL} --config json)\",\"status\":\"$(${APP_CTRL} --running)\",\"message\":\"\"}"
+    local json="{\"config\":\"$(${APP_CTRL} --config json)\",\"status\":\"$(${APP_CTRL} --running)\",\"message\":\"\",\"version\":\"$(frpc -v)\"}"
     echo -n "${json}"
 }
 
-
+printf "Content-type: text/html;charset=UTF-8\r\n"
+printf "Cache-Control: no-cache\r\n"
+printf "\r\n"
 
 case "${REQUEST_METHOD}" in
     "POST")
@@ -54,3 +48,4 @@ case "${REQUEST_METHOD}" in
         fetch_frpc
     ;;
 esac
+

@@ -9,7 +9,7 @@ export APP_DESC="frp is a fast reverse proxy to help you expose a local server b
 
 export APP_WIDTH=1000
 export APP_HEIGHT=700
-export APP_FRPC_VERSION="0.30.0"
+export APP_FRPC_VERSION="0.39.0"
 export APP_VERSION="$(date +%Y%m%d)_${APP_FRPC_VERSION}"
 export APP_BUILD_DATE="$(date +'%Y-%m-%d %H:%M:%S')"
 

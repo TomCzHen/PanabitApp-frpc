@@ -11,10 +11,10 @@ fi
 
 mkdir -p "${LOCAL_BIN_PATH}"
 mkdir -p "${LOCAL_RC_PATH}"
-mkdir -p "${APP_WEB_STATIC_FOLDER}"
+# mkdir -p "${APP_WEB_STATIC_FOLDER}"
 
 tar xzf "${APP_UPGRADE_ROOT}/resource.tar.gz" -C "${LOCAL_USR_PATH}" ./bin 2>&1
 tar xzf "${APP_UPGRADE_ROOT}/resource.tar.gz" -C "${LOCAL_USR_PATH}/etc" ./rc.d 2>&1
-tar xzf "${APP_UPGRADE_ROOT}/resource.tar.gz" -C "${LOCAL_SHARE_PATH}/${APP_NAME}" ./web 2>&1
+# tar xzf "${APP_UPGRADE_ROOT}/resource.tar.gz" -C "${LOCAL_SHARE_PATH}/${APP_NAME}" ./web 2>&1
 
 rm -rf "${APP_UPGRADE_ROOT}/resource.tar.gz"

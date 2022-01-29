@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="css/vuetify.min.css?v1.5.13" rel="stylesheet">
-    <link href="css/google-fonts.css?v1.5.13" rel="stylesheet">
-    <script src="js/vue.min.js?v2.6.10"></script>
-    <script src="js/vuetify.min.js?v1.5.13"></script>
+    <link href="/html/App/frpc/css/vuetify.min.css?v1.5.13" rel="stylesheet">
+    <link href="/html/App/frpc/css/google-fonts.css?v1.5.13" rel="stylesheet">
+    <script src="/html/App/frpc/js/vue.min.js?v2.6.10"></script>
+    <script src="/html/App/frpc/js/vuetify.min.js?v1.5.13"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <title>frp 客户端服务</title>
 </head>
@@ -32,7 +32,7 @@
                                     >
                                     </v-textarea>
                                     <v-card-actions class="pa-3">
-                                        <span class="title primary-title">{{ frpc.status }}</span>
+                                        <span class="title primary-title">版本：{{ frpc.version }} - {{ frpc.status }}</span>
                                     </v-card-actions>
                                 </v-card>
                                 <v-layout row align-start justify-center>
@@ -82,7 +82,7 @@
                                         <v-card light>
                                             <v-layout row wrap align-space-around justify-center>
                                                 <v-flex xs12 sm12 md8>
-                                                    <v-img src="images/qrcode.jpg" min-height="350px"></v-img>
+                                                    <v-img src="/html/App/frpc/images/qrcode.jpg" min-height="350px"></v-img>
                                                 </v-flex>
                                             </v-layout>
                                             <v-card-title>
@@ -91,7 +91,7 @@
                                             <v-card-text>
                                                 <v-list two-line>
                                                     <v-list-tile-content>
-                                                        <v-list-tile-title>客户端使用 frp 0.27.0 版本，服务端版本需要一致。
+                                                        <v-list-tile-title>请注意 frpc 版本与 frp 服务端版本兼容性。
                                                         </v-list-tile-title>
                                                     </v-list-tile-content>
                                                     <v-divider></v-divider>
@@ -120,6 +120,6 @@
         </v-content>
     </v-app>
 </div>
-<script src="js/app.js?2022-01-29"></script>
+<script src="/html/App/frpc/js/app.js?2022-01-29"></script>
 </body>
 </html>
